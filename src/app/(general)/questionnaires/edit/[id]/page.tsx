@@ -11,12 +11,7 @@ export default function QuestionnairesIdPage({
 }: {
   params: { id: string };
 }) {
-  const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect("/api/auth/signin?callbackUrl=/client");
-    },
-  });
+  
 
   const [questionnaire, setQuestionnaire] = useState<Questionnaire | null>(
     null

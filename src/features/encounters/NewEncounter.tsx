@@ -23,12 +23,7 @@ import { Encounter } from "@/types/Encounter";
 import router from "next/router";
 
 const NewEncounter = () => {
-  const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect("/api/auth/signin?callbackUrl=/client");
-    },
-  });
+  
   const form = useForm<Patient>({
     resolver: zodResolver(patientSchema),
     defaultValues: {

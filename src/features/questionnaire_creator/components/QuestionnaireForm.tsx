@@ -26,12 +26,7 @@ interface QuestionnaireFormProps {
 }
 
 const QuestionnaireForm = ({ data, id }: QuestionnaireFormProps) => {
-  const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect("/api/auth/signin?callbackUrl=/client");
-    },
-  });
+  
   const router = useRouter();
 
   const form = useForm<Questionnaire>({

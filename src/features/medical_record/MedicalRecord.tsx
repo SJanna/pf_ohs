@@ -16,12 +16,7 @@ import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 
 const QuestionnaireSelector = ({ encounterID }: { encounterID: string }) => {
-  const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect("/api/auth/signin?callbackUrl=/client");
-    },
-  });
+  
   const [questionnaires, setQuestionnaires] = useState<
     BundleEntry<Questionnaire>[]
   >([]);

@@ -56,12 +56,7 @@ const videoConstraints = {
 };
 
 export default function PatientFormField() {
-  const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect("/api/auth/signin?callbackUrl=/client");
-    },
-  });
+  
 
   const [entryData, setEntryData] = useState<BundleEntry<Organization>[]>([]);
   const { control, setValue } = useFormContext<Patient>();

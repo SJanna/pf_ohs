@@ -39,12 +39,7 @@ import { createResource } from "@/server/createResource";
 import { useSession } from "next-auth/react";
 
 export function FormOrganization() {
-  const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect("/api/auth/signin?callbackUrl=/client");
-    },
-  });
+  
 
   const router = useRouter();
   const form = useForm<z.infer<typeof organizationSchema>>({

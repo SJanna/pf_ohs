@@ -30,12 +30,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
 
 export function Dashboardpatient({ id }: { id: string }) {
-  const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect("/api/auth/signin?callbackUrl=/client");
-    },
-  });
+  
 
   const router = useRouter();
   const defaultPhoto =

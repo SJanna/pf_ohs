@@ -36,12 +36,7 @@ function RowDeleteAlertDialog({
   deleteFunction,
 }: RowDeleteAlertProps) {
 
-  const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect("/api/auth/signin?callbackUrl=/client");
-    },
-  });
+  
   
   return (
     <AlertDialog>

@@ -10,12 +10,7 @@ import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 
 function PractitionersTable() {
-  const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect("/api/auth/signin?callbackUrl=/client");
-    },
-  });
+  
   const [entryData, setEntryData] = useState<BundleEntry<Practitioner>[]>([]);
 
   const tableHeader = {

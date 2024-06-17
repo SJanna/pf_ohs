@@ -11,12 +11,7 @@ import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 
 function AppointmentsTable() {
-  const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect("/api/auth/signin?callbackUrl=/client");
-    },
-  });
+  
 
   const [entryData, setEntryData] = useState<BundleEntry<Appointment>[]>([]);
 

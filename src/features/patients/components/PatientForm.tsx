@@ -26,12 +26,7 @@ interface PatientFormProps {
 }
 
 const PatientForm = ({ data, id }: PatientFormProps) => {
-  const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect("/api/auth/signin?callbackUrl=/client");
-    },
-  });
+  
 
   const router = useRouter();
 

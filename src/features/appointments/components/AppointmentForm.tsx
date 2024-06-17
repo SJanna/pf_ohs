@@ -25,12 +25,7 @@ interface AppointmentFormProps {
 }
 
 const AppointmentForm = ({ data, id }: AppointmentFormProps) => {
-  const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect("/api/auth/signin?callbackUrl=/client");
-    },
-  });
+  
 
   const form = useForm<Appointment>({
     resolver: zodResolver(appointmentSchema),

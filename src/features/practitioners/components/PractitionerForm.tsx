@@ -26,12 +26,7 @@ interface PractitionerFormProps {
 }
 
 const PractitionerForm = ({ data, id }: PractitionerFormProps) => {
-  const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect("/api/auth/signin?callbackUrl=/client");
-    },
-  });
+  
   const router = useRouter();
 
   const form = useForm<Practitioner>({

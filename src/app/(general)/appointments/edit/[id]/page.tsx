@@ -1,20 +1,13 @@
 import AppointmentForm from "@/features/appointments/components/AppointmentForm";
 import { getResource } from "@/server/getResource";
 import { appointmentSchema } from "@/types/Appointment";
-import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
 
 export default async function AppointmentsIdPage({
   params,
 }: {
   params: { id: string };
 }) {
-  const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect("/api/auth/signin?callbackUrl=/client");
-    },
-  });
+  
 
   try {
     const Appointment = await getResource({

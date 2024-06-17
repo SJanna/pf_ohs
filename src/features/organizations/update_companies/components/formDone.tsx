@@ -40,12 +40,7 @@ import { updateResource } from "@/server/updateResource";
 import { useSession } from "next-auth/react";
 
 export function FormOrganizationupdate({ id }: { id: string }) {
-  const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect("/api/auth/signin?callbackUrl=/client");
-    },
-  });
+  
   const router = useRouter();
   const form = useForm<z.infer<typeof organizationSchema>>({
     resolver: zodResolver(organizationSchema),

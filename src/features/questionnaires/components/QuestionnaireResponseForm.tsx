@@ -56,12 +56,7 @@ const QuestionnaireResponseForm: FC<QuestionnaireResponseFormProps> = ({
   questionnaireResponse,
   encounter,
 }): ReactElement => {
-  const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect("/api/auth/signin?callbackUrl=/client");
-    },
-  });
+  
   const form = useForm<QuestionnaireResponse>({
     resolver: zodResolver(questionnaireResponseSchema),
     // defaultValues: initializeResponseWithQuestionnaireDefaults(questionnaire)

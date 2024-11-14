@@ -25,8 +25,7 @@ import { Input } from "@/components/ui/input";
 import { Suspense } from "react";
 import DinamicBreadcrumb from "@/components/Breadcrumbs";
 import Image from "next/image";
-import { signOut, useSession } from "next-auth/react"
-import { redirect } from "next/navigation";
+import { signOut } from "next-auth/react"
 
 export default function Header() {
   

@@ -18,7 +18,6 @@ import {
 import Link from "next/link";
 import { createResource } from "@/server/createResource";
 import { redirect, useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 
 interface QuestionnaireFormProps {
   data?: Questionnaire;
@@ -49,13 +48,11 @@ const QuestionnaireForm = ({ data, id }: QuestionnaireFormProps) => {
           id: id,
           data: questionnaire,
           schema: questionnaireSchema,
-          access_token: session?.user?.access_token,
         });
       } else {
         await createResource({
           data: questionnaire,
           schema: questionnaireSchema,
-          access_token: session?.user?.access_token,
         });
       }
       router.push("/questionnaires");

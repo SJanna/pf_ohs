@@ -47,7 +47,6 @@ import { redirect, useRouter } from "next/navigation";
 import { getResourceBundle } from "@/server/getResourceBundle";
 import { Bundle, BundleEntry } from "@/types/Bundle";
 import { Organization } from "@/types/Organization";
-import { useSession } from "next-auth/react";
 
 const videoConstraints = {
   width: 720,
@@ -56,8 +55,6 @@ const videoConstraints = {
 };
 
 export default function PatientFormField() {
-  
-
   const [entryData, setEntryData] = useState<BundleEntry<Organization>[]>([]);
   const { control, setValue } = useFormContext<Patient>();
 
@@ -86,7 +83,6 @@ export default function PatientFormField() {
       try {
         const res = await getResourceBundle({
           resourceType: "Organization",
-          access_token: session?.user?.access_token,
         });
         setEntryData(res.entry || []);
       } catch (error) {
@@ -94,7 +90,7 @@ export default function PatientFormField() {
       }
     };
     fetchData();
-  }, [session?.user?.access_token]);
+  }, []);
 
   return (
     <div className="space-y-4">
@@ -272,7 +268,9 @@ export default function PatientFormField() {
                     selected={
                       field.value instanceof Date ? field.value : undefined
                     }
-                    onSelect={(e) => field.onChange(e?.toISOString().split("T")[0])}
+                    onSelect={(e) =>
+                      field.onChange(e?.toISOString().split("T")[0])
+                    }
                     // onSelect={(date) => field.onChange(date as Matcher)}
                     disabled={(date: Date) =>
                       date > new Date() || date < new Date("1900-01-01")

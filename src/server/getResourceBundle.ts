@@ -5,35 +5,30 @@ import { FhirError } from "@/errors/FhirError";
 
 interface getBundleProps {
   resourceType: string;
-  access_token: string | undefined;
+  access_token?: string | undefined;
   query?: string;
-}
-
-interface Response {
-  result: {}
-  status: string
 }
 
 export async function getResourceBundle({
   resourceType,
   access_token,
   query,
-}: getBundleProps): Promise<Bundle > {
+}: getBundleProps): Promise<Bundle> {
   try {
-    console.log(parseURL(`${resourceType}`) + (query ? `?${query}` : ""));
+    console.log(parseURL(`${resourceType}`) + `?_format=json` + (query ? `?${query}` : ""));
     const res = await fetch(
-      parseURL(
-        `${resourceType}`
-      ) + (query ? `?${query}` : ""),
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
-      }
+      parseURL(`${resourceType}`) +
+        `?_format=json` +
+        (query ? `&?${query}` : ""),
+        {
+          method: "GET",
+          // headers: {
+          //   Authorization: `Bearer ${access_token}`,
+          // },
+        }
     );
     const data: Bundle = await res.json();
-    // console.log(data);
+    console.log(data);
     const bundle = bundleSchema.safeParse(data);
     if (bundle.success) {
       return data;

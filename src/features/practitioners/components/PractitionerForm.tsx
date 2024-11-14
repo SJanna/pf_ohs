@@ -18,7 +18,6 @@ import {
 import Link from "next/link";
 import { createResource } from "@/server/createResource";
 import { redirect, useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 
 interface PractitionerFormProps {
   data?: Practitioner;
@@ -68,13 +67,11 @@ const PractitionerForm = ({ data, id }: PractitionerFormProps) => {
           id: id,
           data: practitioner,
           schema: practitionerSchema,
-          access_token: session?.user?.access_token,
         });
       } else {
         createResource({
           data: practitioner,
           schema: practitionerSchema,
-          access_token: session?.user?.access_token,
         });
       }
       router.push("/practitioners");

@@ -17,8 +17,7 @@ import {
 import Link from "next/link";
 import { createResource } from "@/server/createResource";
 import { updateResource } from "@/server/updateResource";
-import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
+
 interface AppointmentFormProps {
   data?: Appointment;
   id?: string;
@@ -96,13 +95,11 @@ const AppointmentForm = ({ data, id }: AppointmentFormProps) => {
             id: id,
             data: appointment,
             schema: appointmentSchema,
-            access_token: session?.user?.access_token,
           });
         } else {
           await createResource({
             data: appointment,
             schema: appointmentSchema,
-            access_token: session?.user?.access_token,
           });
         }
       })();

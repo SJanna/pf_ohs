@@ -5,8 +5,6 @@ import OrganizationsColumns from "@/features/organizations/retrieve_companies/co
 import { BundleEntry } from "@/types/Bundle";
 import { Organization } from "@/types/Organization";
 import { DataTable } from "@/components/DataTable/DataTable";
-import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
 
 function OrganizationsTable() {
   
@@ -38,7 +36,6 @@ function OrganizationsTable() {
       try {
         const res = await getResourceBundle({
           resourceType: "Organization",
-          access_token: session?.user?.access_token,
         });
         setEntryData(res.entry || []);
       } catch (error) {
@@ -46,7 +43,7 @@ function OrganizationsTable() {
       }
     };
     fetchData();
-  }, [session?.user?.access_token]);
+  }, []);
 
   return (
     <DataTable

@@ -7,7 +7,7 @@ import { ZodSchema } from "zod";
 export interface executeBundleProps<T extends Resource> {
   data: T;
   schema: ZodSchema<T>;
-  access_token: string | undefined;
+  access_token?: string | undefined;
 }
 
 export async function executeBundle<T extends Resource>({

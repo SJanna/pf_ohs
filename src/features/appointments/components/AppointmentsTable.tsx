@@ -7,12 +7,8 @@ import { DataTable } from "@/components/DataTable/DataTable";
 import Concept from "@/types/Concept";
 import { appointmentStatusObj } from "@/constants/appointmentStatusCodeDisplay";
 import { getResourceBundle } from "@/server/getResourceBundle";
-import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
 
 function AppointmentsTable() {
-  
-
   const [entryData, setEntryData] = useState<BundleEntry<Appointment>[]>([]);
 
   const tableHeader = {
@@ -50,7 +46,6 @@ function AppointmentsTable() {
       try {
         const res = await getResourceBundle({
           resourceType: "Questionnaire",
-          access_token: session?.user?.access_token,
         });
         setEntryData(res.entry || []);
       } catch (error) {
@@ -58,7 +53,7 @@ function AppointmentsTable() {
       }
     };
     fetchData();
-  }, [session?.user?.access_token]);
+  }, []);
 
   return (
     <DataTable

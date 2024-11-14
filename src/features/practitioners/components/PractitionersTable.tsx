@@ -6,8 +6,6 @@ import { Practitioner } from "@/types/Practitioner";
 import { DataTable } from "@/components/DataTable/DataTable";
 import Concept from "@/types/Concept";
 import { getResourceBundle } from "@/server/getResourceBundle";
-import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
 
 function PractitionersTable() {
   
@@ -51,7 +49,6 @@ function PractitionersTable() {
       try {
         const res = await getResourceBundle({
           resourceType: "Practitioner",
-          access_token: session?.user?.access_token,
         });
         setEntryData(res.entry ?? []);
       } catch (error) {
@@ -59,7 +56,7 @@ function PractitionersTable() {
       }
     }
     fetchData();
-  }, [session?.user?.access_token]);
+  }, []);
 
   return (
     <DataTable

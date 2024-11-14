@@ -10,22 +10,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { generateDefaultQuestionnaireResponse } from "@/features/questionnaires/utils/generateDefaultQuestionnaireResponse";
 import {
   Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import QuestionnaireResponseLayout from "@/features/questionnaires/components/QuestionnaireResponseLayout";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
@@ -39,8 +27,6 @@ import {
   TextField,
 } from "./QuestionnaireField";
 import { createResource } from "@/server/createResource";
-import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
 import router from "next/router";
 
 type QuestionnaireResponseFormProps = {
@@ -56,7 +42,6 @@ const QuestionnaireResponseForm: FC<QuestionnaireResponseFormProps> = ({
   questionnaireResponse,
   encounter,
 }): ReactElement => {
-  
   const form = useForm<QuestionnaireResponse>({
     resolver: zodResolver(questionnaireResponseSchema),
     // defaultValues: initializeResponseWithQuestionnaireDefaults(questionnaire)
@@ -72,7 +57,6 @@ const QuestionnaireResponseForm: FC<QuestionnaireResponseFormProps> = ({
       createResource({
         data: values,
         schema: questionnaireResponseSchema,
-        access_token: session?.user?.access_token,
       });
       router.push("/encounters");
     } catch (error) {

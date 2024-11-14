@@ -36,7 +36,6 @@ import {
 } from "@/components/ui/select";
 import { redirect, useRouter } from "next/navigation";
 import { createResource } from "@/server/createResource";
-import { useSession } from "next-auth/react";
 
 export function FormOrganization() {
   
@@ -58,7 +57,6 @@ export function FormOrganization() {
     await createResource({
       data: values,
       schema: organizationSchema,
-      access_token: session?.user?.access_token,
     });
     router.back();
   }

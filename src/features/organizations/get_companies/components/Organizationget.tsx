@@ -51,10 +51,8 @@ import { useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Organization, organizationSchema } from "@/types/Organization";
-import { useSession } from "next-auth/react";
 
 export function Dashboard({ id }: { id: string }) {
-  
   const router = useRouter();
   const form = useForm<z.infer<typeof organizationSchema>>({
     resolver: zodResolver(organizationSchema),
@@ -105,7 +103,6 @@ export function Dashboard({ id }: { id: string }) {
             id: id,
             resourceType: "Organization",
             schema: organizationSchema,
-            access_token: session?.user?.access_token,
           });
           if (data !== null) {
             form.reset(data);
@@ -116,7 +113,7 @@ export function Dashboard({ id }: { id: string }) {
       };
 
       fetchData();
-    }, [form, id, session?.user?.access_token]);
+    }, [form, id]);
   } catch (error) {
     console.error("Error fetching organization data:", error);
   }
@@ -161,7 +158,6 @@ export function Dashboard({ id }: { id: string }) {
         const res = await getpatientsbyorg({
           resourceType: "Patient",
           id: id,
-          access_token: session?.user?.access_token,
         });
         setEntryData(res.entry || []);
       } catch (error) {
@@ -169,7 +165,7 @@ export function Dashboard({ id }: { id: string }) {
       }
     };
     fetchData();
-  }, [id, session?.user?.access_token]);
+  }, [id]);
   return (
     <div className="flex min-h-screen w-full flex-col">
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
@@ -384,10 +380,10 @@ export function Dashboard({ id }: { id: string }) {
                 >
                   <Avatar className="hidden h-9 w-9 sm:flex">
                     {/* Puedes modificar esto según cómo obtengas la imagen del paciente */}
-                    <AvatarImage  
-                    src={`data:image/png;base64,${patient.resource?.photo?.[0]?.data}`}
-                  alt="Avatar" 
-                  />
+                    <AvatarImage
+                      src={`data:image/png;base64,${patient.resource?.photo?.[0]?.data}`}
+                      alt="Avatar"
+                    />
                     <AvatarFallback>SD</AvatarFallback>
                   </Avatar>
                   <div className="grid gap-1">

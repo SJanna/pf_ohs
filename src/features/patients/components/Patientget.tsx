@@ -1,10 +1,7 @@
 "use client"
-import Link from "next/link";
 import { Activity, Menu, Package2, Users } from "lucide-react";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+
 import {
   Card,
   CardContent,
@@ -27,7 +24,6 @@ import { redirect, useRouter } from "next/navigation";
 import { getResource } from "@/server/getResource";
 import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSession } from "next-auth/react";
 
 export function Dashboardpatient({ id }: { id: string }) {
   
@@ -106,7 +102,6 @@ export function Dashboardpatient({ id }: { id: string }) {
             id: id,
             resourceType: "Patient",
             schema: patientSchema,
-            access_token: session?.user?.access_token,
           });
           console.log(data);
           if (data !== null) {
@@ -118,7 +113,7 @@ export function Dashboardpatient({ id }: { id: string }) {
       };
 
       fetchData();
-    }, [form, id,session?.user?.access_token]);
+    }, [form, id]);
   } catch (error) {
     console.error("Error fetching organization data:", error);
   }

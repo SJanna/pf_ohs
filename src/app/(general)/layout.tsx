@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <SessionProvider>
+        {/* <SessionProvider> */}
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -43,7 +43,7 @@ export default function RootLayout({
           </div>
           <Toaster />
         </ThemeProvider>
-        </SessionProvider>
+        {/* </SessionProvider> */}
       </body>
     </html>
   );

@@ -12,8 +12,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import QuestionnaireResponseForm from "../questionnaires/components/QuestionnaireResponseForm";
-import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
 
 const QuestionnaireSelector = ({ encounterID }: { encounterID: string }) => {
   
@@ -28,7 +26,6 @@ const QuestionnaireSelector = ({ encounterID }: { encounterID: string }) => {
       try {
         const data = await getResourceBundle({
           resourceType: "Questionnaire",
-          access_token: session?.user?.access_token,
         });
         setQuestionnaires(data.entry ?? []);
       } catch (error) {
@@ -36,7 +33,7 @@ const QuestionnaireSelector = ({ encounterID }: { encounterID: string }) => {
       }
     };
     fetchData();
-  }, [session?.user?.access_token]);
+  }, []);
 
   const encounter = {
     reference: `Encounter/${encounterID}`,

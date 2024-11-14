@@ -14,7 +14,6 @@ export default async function AppointmentsIdPage({
       id: params.id,
       resourceType: "Appointment",
       schema: appointmentSchema,
-      access_token: session?.user?.access_token,
     });
     if (!Appointment) {
       return <div>Appointment not found.</div>;

@@ -2,8 +2,6 @@
 import PractitionerForm from "@/features/practitioners/components/PractitionerForm";
 import { practitionerSchema } from "@/types/Practitioner";
 import { getResource } from "@/server/getResource";
-import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Practitioner } from "@/types/Practitioner";
 
@@ -12,12 +10,6 @@ export default function PractitionersIdPage({
   }: {
     params: { id: string };
   }) {
-    const { data: session } = useSession({
-      required: true,
-      onUnauthenticated() {
-        redirect("/api/auth/signin?callbackUrl=/client");
-      },
-    });
     const [practitioner, setPractitioner] = useState<Practitioner | null>(null);
     const [error, setError] = useState<Error>();
   
@@ -27,7 +19,6 @@ export default function PractitionersIdPage({
           id: params.id,
           resourceType: "Practitioner",
           schema: practitionerSchema,
-          access_token: session?.user?.access_token,
         })
         .then((data) => {
           setPractitioner(data);
@@ -38,7 +29,7 @@ export default function PractitionersIdPage({
     } catch (error) {
         setError(error as Error);
     }
-    }, [params.id, session]);
+    }, [params.id]);
   
     if (error) {
       return (

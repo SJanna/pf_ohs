@@ -12,8 +12,6 @@ import {
 } from "@/components/ui/card";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { redirect, useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 import { executeBundle } from "@/server/executeBundle";
 import { Bundle, BundleEntry, bundleSchema } from "@/types/Bundle";
 import { Patient, patientSchema } from "@/types/Patient";
@@ -122,7 +120,6 @@ const NewEncounter = () => {
       const response = executeBundle<Bundle>({
         data: patientEncounter,
         schema: bundleSchema,
-        access_token: session?.user?.access_token,
       });
       console.log("Response: ", response);
       router.push("/encounters");

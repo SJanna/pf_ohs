@@ -3,8 +3,6 @@ import React, { useEffect, useState } from "react";
 import QuestionnaireForm from "@/features/questionnaire_creator/components/QuestionnaireForm";
 import { Questionnaire, questionnaireSchema } from "@/types/Questionnaire";
 import { getResource } from "@/server/getResource";
-import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
 
 export default function QuestionnairesIdPage({
   params,
@@ -25,7 +23,6 @@ export default function QuestionnairesIdPage({
           id: params.id,
           resourceType: "Questionnaire",
           schema: questionnaireSchema,
-          access_token: session?.user?.access_token,
         });
         setQuestionnaire(fetchedQuestionnaire);
       } catch (error) {
@@ -34,7 +31,7 @@ export default function QuestionnairesIdPage({
     };
 
     fetchQuestionnaire();
-  }, [params.id, session]);
+  }, [params.id]);
 
   if (error) {
     return (

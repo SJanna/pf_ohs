@@ -5,7 +5,7 @@ interface getResourceProps<T extends Resource> {
   id: string;
   resourceType: string;
   schema: ZodSchema<T>;
-  access_token: string | undefined;
+  access_token?: string | undefined;
 }
 
 export async function getResource<T extends Resource>({
@@ -20,9 +20,9 @@ export async function getResource<T extends Resource>({
     console.log(parseURL(`/${resourceType}/${id}`));
     const res = await fetch(parseURL(`/${resourceType}/${id}`), {
       method: "GET",
-      headers: {
-        Authorization: `Bearer ${access_token}`,
-      },
+      // headers: {
+      //   Authorization: `Bearer ${access_token}`,
+      // },
     });
 
     if (!res.ok) {

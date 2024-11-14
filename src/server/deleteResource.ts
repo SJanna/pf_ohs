@@ -11,14 +11,14 @@ export async function deleteResource({
 }: {
   resourceType: string;
   id: string;
-  access_token: string | undefined;
+  access_token?: string | undefined;
 }): Promise<z.infer<typeof operationOutcomeSchema> | null> {
   try {
     const res = await fetch(parseURL(`/${resourceType}/${id}`), {
       method: "DELETE",
       headers: {
         "Content-Type": "application/fhir+json;charset=utf-8",
-        Authorization: `Bearer ${access_token}`,
+        // Authorization: `Bearer ${access_token}`,
       },
     });
 

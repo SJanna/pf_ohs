@@ -18,7 +18,6 @@ import {
 import Link from "next/link";
 import { createResource } from "@/server/createResource";
 import { redirect, useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 
 interface PatientFormProps {
   data?: Patient;
@@ -105,13 +104,11 @@ const PatientForm = ({ data, id }: PatientFormProps) => {
           id: id,
           data: patient,
           schema: patientSchema,
-          access_token: session?.user?.access_token,
         });
       } else {
         createResource({
           data: patient,
           schema: patientSchema,
-          access_token: session?.user?.access_token,
         });
       }
       router.push("/patients");

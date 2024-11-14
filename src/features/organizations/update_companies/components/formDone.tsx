@@ -37,10 +37,8 @@ import {
 import { redirect, useRouter } from "next/navigation";
 import { getResource } from "@/server/getResource";
 import { updateResource } from "@/server/updateResource";
-import { useSession } from "next-auth/react";
 
 export function FormOrganizationupdate({ id }: { id: string }) {
-  
   const router = useRouter();
   const form = useForm<z.infer<typeof organizationSchema>>({
     resolver: zodResolver(organizationSchema),
@@ -91,7 +89,6 @@ export function FormOrganizationupdate({ id }: { id: string }) {
             id: id,
             resourceType: "Organization",
             schema: organizationSchema,
-            access_token: session?.user?.access_token,
           });
           if (data !== null) {
             form.reset(data);
@@ -102,7 +99,7 @@ export function FormOrganizationupdate({ id }: { id: string }) {
       };
 
       fetchData();
-    }, [form, id, session?.user?.access_token]);
+    }, [form, id]);
   } catch (error) {
     console.error("Error fetching organization data:", error);
   }
@@ -112,7 +109,6 @@ export function FormOrganizationupdate({ id }: { id: string }) {
       id: id,
       data: values,
       schema: organizationSchema,
-      access_token: session?.user?.access_token,
     });
     router.back();
   }
